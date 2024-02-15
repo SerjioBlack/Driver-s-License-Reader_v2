@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image To Text - Webcam</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- (A) LOAD TESSERACT & JS -->
+    <!-- https://cdnjs.com/libraries/tesseract.js -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.1.1/tesseract.min.js"></script>
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <!-- (B) WEBCAM & RESULT -->
+    <video id="vid" autoplay></video>
+    <button id="go">Go!</button>
+    <textarea id="result"></textarea>
+  </body>
+</html>
