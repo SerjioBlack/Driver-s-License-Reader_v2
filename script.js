@@ -155,9 +155,21 @@ function filterLicenseInfo(text) {
   // We go through each line of text
   lines.forEach((line) => {
     // We look for the ID, DOB and ISSUED values in each line
-    if (line.includes("ID:" || "DL")) {
+    if (line.includes("ID:")) {
       licenseInfo.ID = line.match(/\d+ \d+ \d+/)[0];
+    } else if (line.includes("DL")) {
+      licenseInfo.ID = line.match(/\d+ \d+ \d+/)[0];
+    } else if (line.includes("Customer identifier")) {
+      licenseInfo.ID = line.match(/\d+ \d+ \d+/)[0];
+    } else if (line.includes("DLN")) {
+      licenseInfo.ID = line.match(/\d+ \d+ \d+/)[0];
+    } else if (line.includes("EXP:")) {
+      licenseInfo.ISSUED = line.match(/\d{2}-\d{2}-\d{2}/)[0];
+    } else if (line.includes("ISS:")) {
+      licenseInfo.ISSUED = line.match(/\d{2}-\d{2}-\d{2}/)[0];
     } else if (line.includes("DOB:")) {
+      licenseInfo.DOB = line.match(/\d{2}-\d{2}-\d{2}/)[0];
+    } else if (line.includes("Date of birth")) {
       licenseInfo.DOB = line.match(/\d{2}-\d{2}-\d{2}/)[0];
     } else if (line.includes("ISSUED:")) {
       licenseInfo.ISSUED = line.match(/\d{2}-\d{2}-\d{2}/)[0];
