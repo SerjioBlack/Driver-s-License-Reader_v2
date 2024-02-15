@@ -9,7 +9,7 @@ var webkam = {
     webkam.hRes = document.getElementById("result");
 
     // (A2) GET USER PERMISSION TO ACCESS CAMERA
-    navigator.mediaDevices.getUserMedia({ video: true })
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }})
     .then(async (stream) => {
       // (A2-1) CREATE ENGLISH TESSERACT WORKER
       webkam.worker = await Tesseract.createWorker();
