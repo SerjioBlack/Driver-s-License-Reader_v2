@@ -47,31 +47,15 @@
 
 function filterLicenseInfo(text) {
   // Ищем соответствие шаблону для информации о водительском удостоверении
-  const regex = /DRIVER LICENSE[\s\S]*?(?=\n\S)/;
+  const regex = /DRIVER LICENSE\s*[\s\S]*?ID:\s*(\d+)[\s\S]*?DOB:\s*(\d+-\d+-\d+)[\s\S]*?ISSUED\s*:?(\d+-\d+-\d+|ISS\s*\d+)/;
   const match = regex.exec(text);
 
   if (match) {
-    const licenseInfo = match[0];
+    const id = match[1] || "ID не найден";
+    const dob = match[2] || "Дата рождения не найдена";
+    const issued = match[3] || "Дата выдачи не найдена";
 
-    // Находим ID в информации о водительском удостоверении
-    const idRegex = /ID: (\d+)/;
-    const idMatch = idRegex.exec(licenseInfo);
-    const id = idMatch ? idMatch[1] : "ID не найден";
-
-    // Находим адрес в информации о водительском удостоверении
-    const addressRegex = /\d+ [A-Za-z ]+/g;
-    const addressMatch = licenseInfo.match(addressRegex);
-    const address = addressMatch ? addressMatch.join("\n") : "Адрес не найден";
-
-    // Находим дату рождения и дату выдачи
-    const dobRegex = /DOB: (\d+-\d+-\d+)/;
-    const issuedRegex = /ISSUED: (\d+-\d+-\d+)/;
-    const dobMatch = dobRegex.exec(licenseInfo);
-    const issuedMatch = issuedRegex.exec(licenseInfo);
-    const dob = dobMatch ? dobMatch[1] : "Дата рождения не найдена";
-    const issued = issuedMatch ? issuedMatch[1] : "Дата выдачи не найдена";
-
-    return `DRIVER LICENSE\nID: ${id}\n${address}\nDOB: ${dob} ISSUED: ${issued}`;
+    return `DRIVER LICENSE\nID: ${id}\nDOB: ${dob} ISSUED: ${issued}`;
   } else {
     return "Информация о водительском удостоверении не найдена";
   }
